@@ -79,6 +79,7 @@ def test_next_weekday_case2():
     assert parse("next friday", today=date(2026, 5, 16)) == date(2026, 5, 22)
     # 5/16 is a saturday
 
+
 def test_last_weekday():
     assert parse("last Friday", today=date(2026, 5, 13)) == date(2026, 5, 8)
 
@@ -148,5 +149,12 @@ def test_in_n_years():
 def test_a_year_from_now():
     assert parse("a year from now", today=date(2026, 5, 13)) == date(2027, 5, 13)
 
+
 def test_n_years_k_months_before():
     assert parse("2 years, 3 months before Dec. 1, 2025") == date(2023, 9, 1)
+
+
+def test_n_years_k_months_after():
+    assert parse(
+        "1 year and 2 months after yesterday", today=date(2026, 5, 13)
+    ) == date(2027, 7, 12)
