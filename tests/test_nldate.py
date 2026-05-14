@@ -53,6 +53,8 @@ def test_n_days_before():
 def test_n_days_before_n_as_number():
     assert parse("16 days before January 3, 1978") == date(1977, 12, 18)
 
+def test_n_days_ago():
+    assert parse("3 days ago", today=date(2026, 5, 13)) == date(2026, 5, 10)
 
 def test_n_weeks_after():
     assert parse("three weeks after January 15, 2024") == date(2024, 2, 5)

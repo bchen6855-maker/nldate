@@ -193,6 +193,20 @@ def _parse_relative(s: str, today: date) -> date:
                     return base - timedelta(days=delta)
                 return base + timedelta(days=delta)
 
+    m = re.match(r"^(\w+) (days?|weeks?|months?|years?) ago$", s_lower)
+    if m:
+        n = _parse_number(m.group(1))
+        unit = m.group(2)
+        if n is not None:
+            if unit.startswith("day"):
+                return today - timedelta(days=n)
+            if unit.startswith("week"):
+                return today - timedelta(weeks=n)
+            if unit.startswith("month"):
+                return _add_months(today, -n)
+            if unit.startswith("year"):
+                return _add_months(today, -n * 12)
+
     raise ValueError(f"Unable to parse date: {s}")
 
 
