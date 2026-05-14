@@ -47,6 +47,8 @@ WEEKDAY_NAMES: dict[str, int] = {
 }
 
 WORD_NUMBERS: dict[str, int] = {
+    "a": 1,
+    "an": 1,
     "one": 1,
     "two": 2,
     "three": 3,

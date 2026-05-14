@@ -53,8 +53,14 @@ def test_n_days_before():
 def test_n_days_before_n_as_number():
     assert parse("16 days before January 3, 1978") == date(1977, 12, 18)
 
+
 def test_n_days_ago():
     assert parse("3 days ago", today=date(2026, 5, 13)) == date(2026, 5, 10)
+
+
+def test_n_weeks_ago():
+    assert parse("a week ago", today=date(2026, 5, 13)) == date(2026, 5, 6)
+
 
 def test_n_weeks_after():
     assert parse("three weeks after January 15, 2024") == date(2024, 2, 5)
@@ -72,15 +78,21 @@ def test_in_n_days_today_default():
     curr_date = date.today()
     assert parse("in seven days", today=curr_date) == curr_date + timedelta(days=7)
 
+
 def test_today_no_default():
     assert parse("today", today=date(2026, 5, 13)) == date(2026, 5, 13)
+
 
 def test_today_default():
     curr_date = date.today()
     assert parse("today", today=curr_date) == curr_date
 
+
 def test_n_months_after():
-    assert parse("five months after today", today=date(1988, 3, 13)) == date(1988, 8, 13)
+    assert parse("five months after today", today=date(1988, 3, 13)) == date(
+        1988, 8, 13
+    )
+
 
 def test_in_n_days_from():
     assert parse("four days from today", today=date(2026, 5, 13)) == date(2026, 5, 17)
@@ -114,6 +126,7 @@ def test_in_n_days_before_the_day_before_yesterday():
     assert parse(
         "four days before the day before yesterday", today=date(2026, 5, 13)
     ) == date(2026, 5, 7)
+
 
 def test_in_n_years():
     assert parse("in 1 year", today=date(2026, 5, 13)) == date(2027, 5, 13)
