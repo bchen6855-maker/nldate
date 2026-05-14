@@ -66,6 +66,10 @@ def test_n_weeks_after():
     assert parse("three weeks after January 15, 2024") == date(2024, 2, 5)
 
 
+def test_n_weeks_from_now():
+    assert parse("2 weeks from now", today=date(2026, 5, 13)) == date(2026, 5, 27)
+
+
 def test_next_weekday_today_passed():
     assert parse("next friday", today=date(2026, 5, 13)) == date(2026, 5, 22)
 

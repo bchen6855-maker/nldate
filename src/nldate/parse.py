@@ -139,7 +139,7 @@ def _parse_absolute(s: str) -> date | None:
 def _parse_date_ref(s: str, today: date) -> date | None:
     s = s.strip().lower()
 
-    if s == "today":
+    if s in ("today", "now"):
         return today
     if s == "tomorrow":
         return today + timedelta(days=1)
