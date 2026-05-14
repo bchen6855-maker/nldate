@@ -187,6 +187,20 @@ def _parse_relative(s: str, today: date) -> date:
             if unit.startswith("year"):
                 return _add_months(today, n * 12)
 
+    m = re.match(r"^(\w+) years?, (\w+) months? (before|after|from) (.+)$", s_lower)
+    if m:
+        years_n = _parse_number(m.group(1))
+        months_n = _parse_number(m.group(2))
+        direction = m.group(3)
+        ref_str = m.group(4)
+        if years_n is not None and months_n is not None:
+            base = _parse_date_ref(ref_str, today)
+            if base is not None:
+                total_months = years_n * 12 + months_n
+                if direction == "before":
+                    return _add_months(base, -total_months)
+                return _add_months(base, total_months)
+
     m = re.match(
         r"^(\w+) (days?|weeks?|months?|years?) (before|after|from) (.+)$", s_lower
     )
