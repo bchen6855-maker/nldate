@@ -134,3 +134,7 @@ def test_in_n_days_before_the_day_before_yesterday():
 
 def test_in_n_years():
     assert parse("in 1 year", today=date(2026, 5, 13)) == date(2027, 5, 13)
+
+
+def test_a_year_from_now():
+    assert parse("a year from now", today=date(2026, 5, 13)) == date(2027, 5, 13)
