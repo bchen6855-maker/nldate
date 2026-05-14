@@ -156,16 +156,22 @@ def _parse_date_ref(s: str, today: date) -> date | None:
 def _parse_relative(s: str, today: date) -> date:
     s_lower = s.lower().strip()
 
-    m = re.match(r"^next (\w+)$", s_lower)
+    m = re.match(r"^(next|last) (\w+)$", s_lower)
     if m:
-        weekday_name = m.group(1)
+        direction, weekday_name = m.groups()
         target = WEEKDAY_NAMES.get(weekday_name)
         if target is not None:
             current = today.weekday()
-            days_ahead = target - current
-            if days_ahead <= 0:
-                days_ahead += 7
-            return today + timedelta(days=days_ahead)
+            if direction == "next":
+                days_ahead = target - current
+                if days_ahead <= 0:
+                    days_ahead += 7
+                return today + timedelta(days=days_ahead)
+            else:
+                days_behind = current - target
+                if days_behind <= 0:
+                    days_behind += 7
+                return today - timedelta(days=days_behind)
 
     m = re.match(r"^in (\w+) (days?|weeks?|months?|years?)$", s_lower)
     if m:

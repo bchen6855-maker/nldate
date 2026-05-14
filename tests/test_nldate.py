@@ -79,6 +79,9 @@ def test_next_weekday_case2():
     assert parse("next friday", today=date(2026, 5, 16)) == date(2026, 5, 22)
     # 5/16 is a saturday
 
+def test_last_weekday():
+    assert parse("last Friday", today=date(2026, 5, 13)) == date(2026, 5, 8)
+
 
 def test_in_n_days():
     assert parse("in four days", today=date(2026, 5, 13)) == date(2026, 5, 17)
