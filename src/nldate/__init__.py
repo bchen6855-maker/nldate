@@ -1,2 +1,1 @@
-def main() -> None:
-    print("Hello from nldate!")
+from nldate.parse import parse as parse
