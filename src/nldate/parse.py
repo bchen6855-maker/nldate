@@ -102,21 +102,21 @@ def _add_months(d: date, n: int) -> date:
 def _parse_absolute(s: str) -> date | None:
     s = s.strip()
 
-    m = re.match(r"(\w+) (\d{1,2}),? (\d{4})$", s)
+    m = re.match(r"(\w+) (\d{1,2})(?:st|nd|rd|th)?,? (\d{4})$", s)
     if m:
         word, day_str, year_str = m.groups()
         month = MONTH_NAMES.get(word.lower())
         if month:
             return date(int(year_str), month, int(day_str))
 
-    m = re.match(r"(\d{1,2}) (\w+),? (\d{4})$", s)
+    m = re.match(r"(\d{1,2})(?:st|nd|rd|th)? (\w+),? (\d{4})$", s)
     if m:
         day_str, word, year_str = m.groups()
         month = MONTH_NAMES.get(word.lower())
         if month:
             return date(int(year_str), month, int(day_str))
 
-    m = re.match(r"(\d{4}) (\w+) (\d{1,2})$", s)
+    m = re.match(r"(\d{4}) (\w+) (\d{1,2})(?:st|nd|rd|th)?$", s)
     if m:
         year_str, word, day_str = m.groups()
         month = MONTH_NAMES.get(word.lower())
