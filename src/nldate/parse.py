@@ -163,7 +163,7 @@ def _parse_relative(s: str, today: date) -> date:
             days_ahead = target - current + 7
             return today + timedelta(days=days_ahead)
 
-    m = re.match(r"^in (\w+) (days?|weeks?|months?)$", s_lower)
+    m = re.match(r"^in (\w+) (days?|weeks?|months?|years?)$", s_lower)
     if m:
         n = _parse_number(m.group(1))
         unit = m.group(2)
@@ -174,6 +174,8 @@ def _parse_relative(s: str, today: date) -> date:
                 return today + timedelta(weeks=n)
             if unit.startswith("month"):
                 return _add_months(today, n)
+            if unit.startswith("year"):
+                return _add_months(today, n * 12)
 
     m = re.match(r"^(\w+) (days?|weeks?|months?) (before|after|from) (.+)$", s_lower)
     if m:
