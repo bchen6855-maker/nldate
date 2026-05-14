@@ -5,6 +5,8 @@ from datetime import date, timedelta
 def test_today_mdy():
     assert parse("January 15, 2024") == date(2024, 1, 15)
 
+def test_today_mdy_day_with_suffix():
+    assert parse("December 1st, 2025") == date(2025, 12, 1)
 
 def test_today_ymd():
     assert parse("2024 August 15") == date(2024, 8, 15)
@@ -16,6 +18,9 @@ def test_today_dmy():
 
 def test_today_mdy_abbrev():
     assert parse("Jan 15, 2024") == date(2024, 1, 15)
+
+def test_today_mdy_abbrev_with_dot():
+    assert parse("Dec. 1, 2025") == date(2025, 12, 1)
 
 
 def test_today_mdy_abbrev_no_comma():
