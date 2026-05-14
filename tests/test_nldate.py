@@ -70,11 +70,17 @@ def test_n_weeks_from_now():
     assert parse("2 weeks from now", today=date(2026, 5, 13)) == date(2026, 5, 27)
 
 
-def test_next_weekday_today_passed():
-    assert parse("next friday", today=date(2026, 5, 13)) == date(2026, 5, 22)
+def test_next_weekday_case1():
+    assert parse("next friday", today=date(2026, 5, 13)) == date(2026, 5, 15)
+    # 5/13 is a wednesday
 
 
-def test_in_n_days_today_passed():
+def test_next_weekday_case2():
+    assert parse("next friday", today=date(2026, 5, 16)) == date(2026, 5, 22)
+    # 5/16 is a saturday
+
+
+def test_in_n_days():
     assert parse("in four days", today=date(2026, 5, 13)) == date(2026, 5, 17)
 
 

@@ -162,7 +162,9 @@ def _parse_relative(s: str, today: date) -> date:
         target = WEEKDAY_NAMES.get(weekday_name)
         if target is not None:
             current = today.weekday()
-            days_ahead = target - current + 7
+            days_ahead = target - current
+            if days_ahead <= 0:
+                days_ahead += 7
             return today + timedelta(days=days_ahead)
 
     m = re.match(r"^in (\w+) (days?|weeks?|months?|years?)$", s_lower)
