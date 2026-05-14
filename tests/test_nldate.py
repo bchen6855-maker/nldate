@@ -70,12 +70,15 @@ def test_in_n_days_today_default():
     curr_date = date.today()
     assert parse("in seven days", today=curr_date) == curr_date + timedelta(days=7)
 
+def test_today_no_default():
+    assert parse("today", today=date(2026, 5, 13)) == date(2026, 5, 13)
+
+def test_today_default():
+    curr_date = date.today()
+    assert parse("today", today=curr_date) == curr_date
 
 def test_n_months_after():
-    assert parse("five months after today", today=date(1988, 3, 13)) == date(
-        1988, 8, 13
-    )
-
+    assert parse("five months after today", today=date(1988, 3, 13)) == date(1988, 8, 13)
 
 def test_in_n_days_from():
     assert parse("four days from today", today=date(2026, 5, 13)) == date(2026, 5, 17)

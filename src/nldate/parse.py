@@ -202,4 +202,8 @@ def parse(s: str, today: date | None = None) -> date:
     if result is not None:
         return result
 
+    result = _parse_date_ref(s, today)
+    if result is not None:
+        return result
+
     return _parse_relative(s, today)
